@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchSubjectsList, changeCategory } from "../actions";
-
+import { categoriesList } from "../consts";
 const ShowSubjects = (props) => {
   const { fetchSubjectsList, changeCategory, subjects, categorySelected } =
     props;
   //choose the first category automaticaly
   useEffect(() => {
-    changeCategory("G502");
+    changeCategory(categoriesList[0]);
   }, [changeCategory]);
 
   //change subjects list
@@ -19,12 +19,6 @@ const ShowSubjects = (props) => {
       fetchSubjectsList(categorySelected);
     }
   }, [fetchSubjectsList, categorySelected]);
-
-  const categoriesList = [
-    { key: "G502", name: "Wybory" },
-    { key: "G499", name: "Radni" },
-    { key: "G199", name: "Dochody" },
-  ];
 
   const renderCategories = (categoriesList) => {
     return categoriesList.map((category) => {

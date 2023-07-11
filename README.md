@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# :chart: European Election Charts
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### https://ascislowska.github.io/europeanElections/
+
+## Typescript + Recharts + Bulma
+
+A web application that creates rankings of voivodeships on the basis of the Local Data Bank. The application is built in React using Redux, React-Redux, Redux Thunk and the Axios library. To style the application, I used the Semantic UI library.
+
+## Application operation:
+
+1. The user selects the category and subject of the ranking. The selected category is saved in the Redux Store and the action creator is launched. Thanks to Redux Thunk and Axios library, action creator downloads the list of topics for the given category from the GUS API. For a better UX, after entering the page, the first category from the list is selected by default (using useEffect).
+2. The user goes to a route with variables available for a given topic in terms of time.
+   Based on the id in the url, the application downloads a list of variables available for a given topic, and then selects the first variable from the list as active by default.
+3. After selecting the active variable, the application sends a request to the gus API for a list of years available for this variable and displays it on the page. By default, it selects the first year in the list.
+4. When we have the variable and year specified, the fetchData function is launched, which fetches a set of data from the GUS api.
+5. The ShowData component checks if an object with data to be displayed is available in the Redux Store. When it appears, the ShowData function maps the list of data.
+   The data is available in the form of a list - each voivoidship represents an object. Inside the object there is another list with the right data - to gain access to them I use a nested map loop.
+6. Category selection is saved in Redux and is stored until another theme is selected. The rest of the data is cleaned up from the Redux store each time the (using the cleanup function in useEffect Hook) - this way there is no risk that the data downloaded earlier will be displayed on another topic.
+
+![Api structure](api-structure.png)
+
+## Technologies used
+
+- Redux
+  - [Actions](https://github.com/ascislowska/statistics/src/actions/index.js "actions")
+  - [Reducer](https://github.com/ascislowska/statistics/src/reducers/index.js "reducer")
+  - [MapStateToProps](https://github.com/ascislowska/statistics/blob/b285ac671e2020ee4c97d99dd4fac389c9d5ee99/src/components/ShowVariables.js#L123)
+- React Router Dom
+  - [Routes](https://github.com/ascislowska/statistics/src/components/App.js "routes")
+- React reusable components:
+  - [ShowData](https://github.com/ascislowska/statistics/src/components/ShowData.js "rendering data")
+- Styled with Semantic UI
+- Deployed with Firebase
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
