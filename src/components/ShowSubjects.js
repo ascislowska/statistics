@@ -10,7 +10,7 @@ const ShowSubjects = (props) => {
     props;
   //choose the first category automaticaly
   useEffect(() => {
-    changeCategory(categoriesList[0]);
+    changeCategory(categoriesList[0].key);
   }, [changeCategory]);
 
   //change subjects list
