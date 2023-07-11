@@ -1,8 +1,8 @@
-# :chart: European Election Charts
+# :chart: Public data rankings
 
-### https://ascislowska.github.io/europeanElections/
+### https://statistics-de575.web.app/
 
-## Typescript + Recharts + Bulma
+## React + Redux + Semantic UI
 
 A web application that creates rankings of voivodeships on the basis of the Local Data Bank. The application is built in React using Redux, React-Redux, Redux Thunk and the Axios library. To style the application, I used the Semantic UI library.
 
